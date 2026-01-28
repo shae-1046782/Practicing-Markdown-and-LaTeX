@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{amsmath, amsfonts, amsthm}
+\usepackage[procnames]{listings}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\usepackage{fontspec}
+\usepackage[english]{babel}
+\usepackage{lipsum}
+
+\tcbuselibrary{listings}
+
+\setmainfont{Georgia}
+\setmonofont{JetBrainsMono}[
+    Path = ./fonts/,
+    Extension = .ttf,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont = *-Italic,
+    BoldItalicFont = *-BoldItalic
+]
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+    citecolor=blue,
+    pdftitle={Documentation},
+    pdfpagemode=FullScreen,
+}
+
+\definecolor{bgColor}{HTML}{232136}
+\definecolor{borderColor}{HTML}{874864}
+\definecolor{commentColor}{HTML}{6E6A86}
+\definecolor{keywordColor}{HTML}{3E8FB0}
+\definecolor{stringColor}{HTML}{F6C177}
+
+%code colors
+\definecolor{procnameColor}{HTML}{EA9A97} %can also be methodColor
+\definecolor{variableColor}{HTML}{98C379}
+\definecolor{methodColor}{HTML}{D19A66}
+\definecolor{classColor}{HTML}{ff6464}
+
+%notes colors
+\definecolor{textnoteBorderColor}{HTML}{808080}
+\definecolor{textnoteBgColor}{HTML}{D3D3D3}
+
+%warningnotes colors
+\definecolor{warningnoteBorderColor}{HTML}{8B0000}
+\definecolor{warningnoteBgColor}{HTML}{FFCCCB}
+
+%successnotes colors
+\definecolor{successnoteBorderColor}{HTML}{008B00}
+\definecolor{successnoteBgColor}{HTML}{CBFFCB}
+
+\lstset{
+    basicstyle = \footnotesize\ttfamily\color{white},
+    keywordstyle = \itshape\ttfamily\color{keywordColor},
+    commentstyle = \itshape\ttfamily\color{commentColor},
+    stringstyle = \ttfamily\color{stringColor},
+    numbers = left,
+    numberstyle = \tiny\ttfamily\color{lightgray},
+    stepnumber = 1,
+    numbersep = 5pt,
+    showspaces = false,
+    showstringspaces = false,
+    procnamestyle = \ttfamily\color{procnameColor},
+    breaklines = true
+}
+
+\tcbset{
+    colback = bgColor,
+    colframe = borderColor,
+    fonttitle = \footnotesize\ttfamily\bfseries,
+    arc = 4pt
+}
+
+\newtcolorbox{codeblock}[1]{
+    colback = bgColor,
+    colframe = borderColor,
+    fonttitle = \footnotesize\ttfamily\bfseries,
+    title=#1, % title for the code block
+    arc = 4pt
+}
+
+%textnote
+\newtcolorbox{textnote}[1]{
+    colback = textnoteBgColor,
+    colframe = textnoteBorderColor,
+    fonttitle = \footnotesize\bfseries,
+    title=#1, % title for the textnote block
+    arc = 4pt
+}
+
+%warningnote
+\newtcolorbox{warningnote}[1]{
+    colback = warningnoteBgColor,
+    colframe = warningnoteBorderColor,
+    fonttitle = \footnotesize\bfseries,
+    title=#1, % title for the warningnote block
+    arc = 4pt
+}
+
+%successnote
+\newtcolorbox{successnote}[1]{
+    colback = successnoteBgColor,
+    colframe = successnoteBorderColor,
+    fonttitle = \footnotesize\bfseries,
+    title=#1, % title for the successnote block
+    arc = 4pt
+}
+
+% Creates a code block from the given file, 3 arguments
+% #1 = title of the tcolorbox
+% #2 = language of the code
+% #3 = path to file
+\newcommand{\codefromfile}[3][]{
+    \begin{tcolorbox}[
+        title = #1 % title for the code block
+    ]
+        \lstinputlisting[
+            language = #2, % language of the code
+        ]{#3} % path to the file
+    \end{tcolorbox}
+}
